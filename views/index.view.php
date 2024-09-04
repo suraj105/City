@@ -11,9 +11,11 @@
         <h1> Cities in Germany </h1>
         <h5>This website lets you search cities of germany!</h5>
         <nav>
-            <?php foreach($alphabet as $a): ?>
-                <a href="index.php" > <?php echo e($a); ?></a>
-                <?php endforeach; ?>
+        <?php foreach($alphabet as $a): ?>
+             <a href="index.php?<?php echo http_build_query(['char' => e($a)]) ?>">
+                 <?php echo e($a); ?></a>
+            <?php endforeach; ?>
+
         </nav>
     </header>
 
