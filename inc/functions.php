@@ -14,29 +14,19 @@ function generate_alphabet(){
     return $char;
 }
 
-function getCitiesThatStartsWith(string $char){
-        global $pdo;
+   
+function render($path, array $data = []) {
+    ob_start();
+    extract($data);
+    require $path;
+    $content = ob_get_contents();
+    ob_end_clean();
 
-        $alphabet = generate_alphabet();
-        if(!in_array($char, $alphabet)){
-            return NULL;
-        }
+    $alphabet = generate_alphabet();
 
-        $stmt = $pdo->prepare('SELECT * FROM `cities` WHERE `title` LIKE :title ORDER BY `title` ASC, `zip` ASC');
-        $stmt->bindValue(':title', "{$char}%");
-        $stmt->execute();
-
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-         foreach($results as $result): 
-             echo $result['title']; 
-         endforeach; 
-        
-    }
-
-    function render($path, array $data = []) {
-        extract($data);
-        require $path;
-    }
+    require __DIR__ . '/../views/layouts/main.view.php';
+   
+}
     
 
 ?>
