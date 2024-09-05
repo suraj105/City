@@ -1,13 +1,14 @@
-<?php 
+<?php
 
 require __DIR__ . '/inc/all.php';
 
 $alphabet = generate_alphabet();
 
-$char = (string)($_GET['char'] ?? 'A') ;
 
-$cities = getCitiesThatStartsWith($char)['title'];
+$char = (string) ($_GET['char'] ?? 'A');
+$cities = getCitiesThatStartsWith($char);
 
-require __DIR__ . '/views/index.view.php';
-
-?>
+render(__DIR__ . '/views/index.view.php', [
+    'cities' => $cities,
+    'alphabet' => $alphabet
+]);

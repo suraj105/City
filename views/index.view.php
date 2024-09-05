@@ -2,22 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./styles/simple.css" />
     <title>Document</title>
+    <link rel="stylesheet" href="./styles/simple.css">
 </head>
 <body>
     <header>
-        <h1> Cities in Germany </h1>
-        <h5>This website lets you search cities of germany!</h5>
+        <h1>Cities in germany</h1>
+        <p>Hier finden Sie eine Übersicht über alle Städte in Deutschland</p>
         <nav>
-        <?php foreach($alphabet as $a): ?>
-             <a href="index.php?<?php echo http_build_query(['char' => e($a)]) ?>">
-                 <?php echo e($a); ?></a>
+            <?php foreach($alphabet AS $char): ?>
+                <a href="index.php?<?php echo http_build_query(['char' => $char]); ?>">
+                    <?php echo e($char); ?>
+                </a>
             <?php endforeach; ?>
-
         </nav>
     </header>
+    <main>
+        <?php if(!empty($cities)): ?>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name der Stadt</th>
+                        <th>Bevölkerung</th>
+                        <th>Fläche</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($cities AS $city): ?>
+                        <tr>
+                            <td><?php echo e($city['title']); ?></td>
+                            <td><?php echo e($city['population']); ?></td>
+                            <td><?php echo e($city['area']); ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
 
+        <?php endif; ?>
+    </main>
 </body>
 </html>

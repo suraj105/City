@@ -33,4 +33,10 @@ function getCitiesThatStartsWith(string $char){
         
     }
 
+    function render($path, array $data = []) {
+        extract($data);
+        require $path;
+    }
+    
+
 ?>
